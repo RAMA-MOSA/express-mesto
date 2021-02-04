@@ -1,4 +1,4 @@
-module.exports.users = [
+[
   {
       "name": "Ada Lovelace",
       "about": "Mathematician, writer",
