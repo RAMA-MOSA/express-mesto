@@ -5,20 +5,30 @@ const fs = require('fs');
 
 usersRouter.get('/users', (req, res) => {
   fs.readFile(usersData, {encoding: 'utf8'}, (err, data) => {
-    if(err){
-        res.status(404).send({message: 'Запрашиваемый ресурс не найден'});
+    try {
+      if (err) {
+        res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
         return;
+      }
+      const newData = JSON.parse(data);
+      res.send(newData);
+    } catch (e) {
+      console.log('error = ', e.message);
+      res.status(500).send({ message: 'Ошибка на сервере' });
     }
-    const newData = JSON.parse(data);
-    res.send(newData);
   });
 });
 
 usersRouter.get('/users/:id', (req, res) => {
   fs.readFile(usersData, { encoding: 'utf8' }, (err, data) => {
-    if(err){
-        res.status(404).send({message: 'Запрашиваемый ресурс не найден'});
+    try {
+      if (err) {
+        res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
         return;
+      }
+    } catch (e) {
+      console.log('error = ', e.message);
+      res.status(500).send({ message: 'Ошибка на сервере' });
     }
     const newData = JSON.parse(data);
     const user = newData.find((item) => item._id === req.params.id);
