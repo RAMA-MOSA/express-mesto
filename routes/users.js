@@ -26,17 +26,17 @@ usersRouter.get('/users/:id', (req, res) => {
         res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
         return;
       }
+      const newData = JSON.parse(data);
+      const user = newData.find((item) => item._id === req.params.id);
+      if(!user){
+        res.status(404).send({message: 'Нет пользователя с таким id'});
+        return;
+      }
+      res.send(user);
     } catch (e) {
       console.log('error = ', e.message);
       res.status(500).send({ message: 'Ошибка на сервере' });
     }
-    const newData = JSON.parse(data);
-    const user = newData.find((item) => item._id === req.params.id);
-    if(!user){
-      res.status(404).send({message: 'Нет пользователя с таким id'});
-      return;
-    }
-    res.send(user);
   });
 });
 

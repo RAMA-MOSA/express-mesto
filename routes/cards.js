@@ -10,12 +10,12 @@ cardsRouter.get('/cards', (req, res) => {
         res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
         return;
       }
+      const newData = JSON.parse(data);
+      res.send(newData);
     } catch (e) {
       console.log('error = ', e.message);
       res.status(500).send({ message: 'Ошибка на сервере' });
     }
-    const newData = JSON.parse(data);
-    res.send(newData);
   });
 });
 
