@@ -1,43 +1,10 @@
 const usersRouter = require('express').Router();
-const path = require('path');
-const usersData = path.join(__dirname, '../data/users.json');
-const fs = require('fs');
+const {getUsers, getUserById, createUser, updateUser, updateAvatar} = require('../controllers/users');
 
-usersRouter.get('/users', (req, res) => {
-  fs.readFile(usersData, {encoding: 'utf8'}, (err, data) => {
-    try {
-      if (err) {
-        res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
-        return;
-      }
-      const newData = JSON.parse(data);
-      res.send(newData);
-    } catch (e) {
-      console.log('error = ', e.message);
-      res.status(500).send({ message: 'Ошибка на сервере' });
-    }
-  });
-});
+usersRouter.get('/users', getUsers);
+usersRouter.get('/users/:id', getUserById);
+usersRouter.post('/users', createUser);
+usersRouter.patch('/users/me', updateUser);
+usersRouter.patch('/users/me/avatar', updateAvatar);
 
-usersRouter.get('/users/:id', (req, res) => {
-  fs.readFile(usersData, { encoding: 'utf8' }, (err, data) => {
-    try {
-      if (err) {
-        res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
-        return;
-      }
-      const newData = JSON.parse(data);
-      const user = newData.find((item) => item._id === req.params.id);
-      if(!user){
-        res.status(404).send({message: 'Нет пользователя с таким id'});
-        return;
-      }
-      res.send(user);
-    } catch (e) {
-      console.log('error = ', e.message);
-      res.status(500).send({ message: 'Ошибка на сервере' });
-    }
-  });
-});
-
-module.exports = usersRouter;
+module.exports = usersRouter
