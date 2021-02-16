@@ -72,6 +72,10 @@ const likeCard = (req, res) => {
         { new: true },
       )
         .then((card) => {
+          if (!card) {
+            res.status(404).send({ message: 'Карточка не найдена.' });
+            return;
+          }
           res.status(200).send(card);
         })
         .catch((err) => {
@@ -98,6 +102,10 @@ const dislikeCard = (req, res) => {
         { new: true },
       )
         .then((card) => {
+          if (!card) {
+            res.status(404).send({ message: 'Карточка не найдена.' });
+            return;
+          }
           res.status(200).send(card);
         })
         .catch((err) => {
