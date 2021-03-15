@@ -24,3 +24,11 @@
 * API REST
 * MongoDB
 * RegExp
+
+## Инструкция по установке:
+```
+git clone https://github.com/RAMA-MOSA/express-mesto.git
+npm install
+npm run dev - запускает сервер
+npm run start - запускает сервер с hot-reload
+```
