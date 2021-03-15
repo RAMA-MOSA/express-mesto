@@ -6,7 +6,7 @@
  REST API для проектной работы "Mesto", связанное с базой данных MongoDB.
  "Mesto" - это интерактивная страница, где пользователи могут делиться фотографиями.
  
-[Проектная работа на GitHub Pages](https://rama-mosa.github.io/express-mesto)
+[Проектная работа на GitHub Pages](https://rama-mosa.github.io/mesto-react/index.html)
 
 ## Функционал:
  Роуты для пользователей:
